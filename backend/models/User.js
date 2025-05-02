@@ -59,7 +59,9 @@
             type: Boolean,
             default: true,
         },
-
+        accountType:{
+            type: String,
+        }
 
     },{timestamps: true});
     module.exports = mongoose.model("User", user_Schema);

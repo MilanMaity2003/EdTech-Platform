@@ -3,7 +3,7 @@
 
     exports.updateProfile = async(req, res) =>{
         try{
-            const {dateOfBirth = "", about = "", gender, contactNumber } = req.body;
+            const {dateOfBirth, about = "", gender, contactNumber } = req.body;
             const id = req.user.id;
             if(!contactNumber || !gender || !id){
                 return res.status(401).json({
@@ -18,7 +18,7 @@
                 gender: gender,
                 contactNumber: contactNumber,
             }
-            const updatingProfile = await Profile.findByIdAndUpdate({profileId}, {profile}, {new: true});
+            const updatingProfile = await Profile.findByIdAndUpdate(profileId, profile, {new: true});
             res.status(200).json({
                 success: true,
                 massage: "Profile is updated successfully",

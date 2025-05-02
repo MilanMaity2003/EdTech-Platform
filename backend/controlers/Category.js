@@ -50,7 +50,7 @@
             const courses = await Category.findById(categoryId)
                                             .populate({
                                                 path: "course",
-                                                match: {status:"Published"},
+                                                // match: {status:"Published"},
                                                 populate: ([{path: "instructor"},{path: "ratingAndReview"}])
                                             })
                                             .exec();
@@ -70,7 +70,7 @@
                 const allCategoryCourses = await Category.find({})
                                             .populate({
                                                 path: "course",
-                                                match: {status:"Published"},
+                                                // match: {status:"Published"},
                                                 populate: ([{path: "instructor"},{path: "ratingAndReview"}])
                                             })
                                             .exec();

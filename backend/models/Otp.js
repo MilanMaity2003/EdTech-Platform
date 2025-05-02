@@ -11,14 +11,14 @@
         },
         createdAt:{
             type: Date,
-            default: Date.now(),
-            expires: 5*60,
+            default: Date.now,
+            expires: 300,
         },
     });
 
     async function sendVarificationEmail(email, otp){
         try{
-            const emailResposnse = mailSender(email,"Verification email from stydyLab", mailTemplate(otp));
+            const emailResposnse = await mailSender(email,"Verification email from stydyLab", mailTemplate(otp));
             console.log("Email is send successfuly ", emailResposnse.response);
         }
         catch(error){

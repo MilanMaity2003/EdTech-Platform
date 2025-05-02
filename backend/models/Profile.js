@@ -4,7 +4,7 @@
         gender:{
             type: String,
         },
-        dataOfBirth:{
+        dateOfBirth:{
             type: String,
         },
         about:{

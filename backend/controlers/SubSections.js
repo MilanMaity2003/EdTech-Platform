@@ -1,6 +1,6 @@
     const Section = require('../models/Section');
     const SubSection = require('../models/SubSection');
-    const uploadImageToCloudinary = require('../utils/imageUploader');
+    const {uploadImageToCloudinary} = require('../utils/imageUploader');
     exports.createSubSection = async(req, res) =>{
         try{
 
@@ -11,7 +11,6 @@
                     massage: "All filds are required",
                 })
             }
-
 
             const uploadVideo = await uploadImageToCloudinary(video, process.env.FOLDER_NAME);
             const creatingSubSection = await SubSection.create({
@@ -55,25 +54,26 @@
                 description: description,
             }
 
-            if(req.files || req.files.video){
-                const video = req.files.videoFile;
+            if(req.files && req.files.video){
+                const video = req.files.video;
                 const uploadVideo = await uploadImageToCloudinary(video, process.env.FOLDER_NAME);
                 subSectiondetails.timeDuration = `${uploadVideo.duration}`;
                 subSectiondetails.videoUrl = uploadVideo.secure_url;
             }
             
             
-            const updateSubSection = await SubSection.findByIdAndUpdate({subSectionId},{subSectiondetails}, {new: true});
+            const updateSubSection = await SubSection.findByIdAndUpdate(subSectionId,subSectiondetails, {new: true});
 
-            const updatedSubSection = await Section.findById(sectionId).populate("subSection").exec();
+            const updatedSubSections = await Section.findById(sectionId).populate("subSection").exec();
             res.status(200).json({
                 
                 success: true,
                 massage: "SubSection is updated successfully",
-                updatedSubSection,
+                updatedSubSections,
             })
         }
         catch(error){
+            console.log(error);
             res.status(400).json({
                 massage: "Error in updating SubSection",
             })
@@ -83,7 +83,7 @@
 
     exports.deleteSubSection = async(req, res) =>{
         try{
-            const {subSectionId, sectionId} = req.params;
+            const {subSectionId, sectionId} = req.body;
 
             
             await Section.findByIdAndUpdate({_id:sectionId}, {
@@ -101,6 +101,7 @@
             })
         }
         catch(error){
+            console.log(error);
             res.status(400).json({
                 massage: "Error in deleting subsection",
             })

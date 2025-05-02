@@ -1,5 +1,5 @@
     const Course = require('../models/Course');
-    const Section = require('../models/Course');
+    const Section = require('../models/Section');
 
     exports.createSection = async(req, res) =>{
         try{
@@ -11,7 +11,7 @@
                 })
             }
             const newSection = await Section.create({sectionName});
-            const updatedCourse = await Course.findByIdAndUpdate({courseId},
+            const updatedCourse = await Course.findByIdAndUpdate(courseId,
                                                                 {
                                                                     $push:{
                                                                        courseContent: newSection._id, 
@@ -22,10 +22,11 @@
             res.status(200).json({
                 success: true,
                 massage: "Section is created successfully", 
-                updatedCourse,
+               newSection,
             })
         }
         catch(error){
+            console.log( "error is " + error);
             res.status(400).json({
                 massage: "Error in creating section",
             })
@@ -39,7 +40,7 @@
                     massage: "All filds are required",
                 })
             }
-            const section = await Section.findByIdAndUpdate({sectionId}, {sectionName}, {new: true});
+            const section = await Section.findByIdAndUpdate(sectionId, {sectionName}, {new: true});
             res.status(200).json({
                 success: true,
                 massage: "Section is updated successfully",
@@ -58,12 +59,19 @@
 
     exports.deleteSection = async(req, res) =>{
         try{
-            const {sectionId} = req.params;
+            const {sectionId,courseId} = req.body;
             await Section.findByIdAndDelete(sectionId);
-
+            const updatedCourse = await Course.findByIdAndUpdate(courseId,
+                {
+                    $pull:{
+                       courseContent: sectionId, 
+                    }
+                },
+                {new: true},
+)
             res.status(200).json({
                 success: true,
-                massage: "Section is updated successfully",
+                massage: "Section is deleted successfully",
             })
         }
         catch(error){

@@ -7,7 +7,7 @@
                     user: process.env.MAIL_USER,
                     pass: process.env.MAIL_PASS,
                 } });
-            let info = await transporter.mailSender({
+            let info = await transporter.sendMail({
                 from: "From StudyLab",
                 to:`${email}`,
                 subject:`${title}`,

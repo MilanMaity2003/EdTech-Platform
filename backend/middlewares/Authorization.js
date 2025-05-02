@@ -12,12 +12,13 @@ const jwt = require('jsonwebtoken');
                 })
             }
             try{
-                const decode =  jwt.verify(token, process.env.JWT_SECREAT);
+                const decode =  jwt.verify(token, process.env.JWT_SECRAT);
                 console.log( "decode "+  decode);
                 req.user = decode;
                 console.log(req.user);
             }
             catch(error){
+                console.log(error);
                 return res.status(401).json({
                     massage: "Token is invalid",
                 })

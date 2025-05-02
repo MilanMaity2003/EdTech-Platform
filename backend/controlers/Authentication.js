@@ -7,7 +7,7 @@
     require('dotenv').config();
     exports.sendOTP = async(req, res) =>{
         try{
-            const email = req.body;
+            const {email} = req.body;
             //check if user is present or not
             const userPresent = await User.findOne({email});
 
@@ -44,6 +44,7 @@
             })
         }
         catch(error){
+            console.log(error);
             res.status(400).json({
                 massage: "Error in generating otp",
             })
@@ -73,43 +74,47 @@
             });
            }
 
-           const recentOTP = OTP.find({email}).sort({createdAt : -1}).limit(1);
+           const recentOTP = await OTP.find({email}).sort({createdAt : -1}).limit(1);
            if(recentOTP.length == 0){
                 return res.status(400).json({
                     massage: "OTP not found",
                 })
            }
-           else if(otp != recentOTP){
+           console.log(recentOTP[0].otp);
+            if(otp != recentOTP[0].otp){
             return res.status(400).json({
                 massage:"Invalid OTP",
             });
            }
-          const hashPassword = bcrypt.hash(password, 10);
+          const hashPassword = await bcrypt.hash(password, 10);
 
 
-          const profile_details = Profile.create({
+          const profile_details = await Profile.create({
             gender: null,
-            dataOfBirth: null,
+            dateOfBirth: null,
             about: null,
             contactNumber: contactNumber,
           });
           
           
-          const user = User.create({
+          const user = await User.create({
             firstName,
             lastName,
             email,
             password: hashPassword,
             additionalDetails: profile_details._id,
-            image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`
+            image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName} ${lastName}`,
+            accountType,
           });
           return res.status(200).json({
             success: true,
             massage: "User is created successfully",
+            user
           });
 
         }
         catch(error){
+            console.log(error);
             res.status(400).json({
                 massage: "Error in register"
             });
