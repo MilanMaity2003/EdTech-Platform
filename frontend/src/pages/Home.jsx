@@ -4,6 +4,12 @@ import { FaArrowRight } from "react-icons/fa";
 import HighlightText from "../components/core/HomePage/HighlightText";
 import CodeBlocks from "../components/core/HomePage/CodeBlocks";
 import CTAButton from "../components/core/HomePage/CTAButton";
+import banner from "../assets/Images/banner.mp4"
+import TimeLineSection from "../components/core/HomePage/TimeLineSection";
+import LearningLanguageSection from "../components/core/HomePage/LearningLanguageSection";
+import InstructorSection from "../components/core/HomePage/InstructorSection";
+import Footer from "../components/common/Footer";
+import ExploreMore from "../components/core/HomePage/ExploreMore";
 const Home = () => {
     return(
         <div>
@@ -40,15 +46,15 @@ const Home = () => {
             </div>
 
             
-            {/* <div className=" mx-3 -my-12 shadow-blue-200">
+            <div className=" mx-3 my-12 shadow-blue-200">
                 <video
                 muted
                 loop
                 autoPlay>
-                <source src="" type="video/mp4"></source>
+                <source src= {banner} type="video/mp4"></source>
 
                 </video>
-            </div> */}
+            </div>
 
             {/* code section 1 */}
 
@@ -72,7 +78,7 @@ const Home = () => {
                     }
                     ctabtn2={
                         {
-                            btnText: "Try it yourself",
+                            btnText: "Learn More",
                             active: false,
                             linkto: "/login"
                         }
@@ -114,9 +120,69 @@ const Home = () => {
 
             </div>
 
+            {/* Explore More  */}
+            <ExploreMore/>
+
            </div>
 
            {/* section2 */}
+
+           <div className=" bg-pure-greys-5 text-richblack-700 ">
+                    <div className=" homepage_bg h-[333px]">
+                        <div className=" w-11/12 max-w-maxContent flex items-center justify-center  gap-5 mx-auto mt-8  pt-24 ">
+                        <div className=" h-[250px]"></div>
+                            <CTAButton active={true} linkto={"/siguup"}>
+                                <div className=" flex items-center gap-3 ">
+                                    Explore Full Catalog
+                                    <FaArrowRight/>
+                                </div>
+                            </CTAButton>
+                            <CTAButton active={false} linkto={"/signup"}>
+                                <div className=" text-white">
+                                    Learn More
+                                </div>
+                            </CTAButton>
+                        </div>
+                    </div>
+
+                    <div className=" mt-10 mx-auto w-11/12 max-w-maxContent flex flex-col items-center justify-center gap-7">
+                        <div className=" flex gap-5 mb-10 ">
+                            <div className=" font-inter font-semibold w-[45%] text-4xl">
+                                Get the Skills you need for a 
+                                <HighlightText text={"job that is in demand"}/>
+                            </div>
+                            <div className=" flex flex-col gap-10 w-[40%] items-start">
+                                <div className=" text-[16px]">
+                                    <p>The modern StudyNotion is the dictates its own terms. Today, to be a competitive specialist requires more than professional skills.</p>
+                                </div>
+                                <div>
+                                    <CTAButton active={true} linkto={"/signup"}>
+                                        Learn More
+                                    </CTAButton>
+                                </div>
+
+                            </div>
+                        </div>
+                        
+                        <TimeLineSection/>
+                    <LearningLanguageSection/>
+                    </div>
+
+                    
+           </div>
+
+
+            {/* section 3 */}
+
+            <div className=" w-11/12 mx-auto max-w-maxContent flex-col items-center  justify-between gap-8 bg-richblack-900 text-white mt-10">
+                    <InstructorSection/>
+                    <h2 className=" text-center text-4xl font-semibold mt-10">
+                        Review from Other Learners
+                    </h2>
+            </div>
+
+            <Footer/>
+
         </div>
     )
 }

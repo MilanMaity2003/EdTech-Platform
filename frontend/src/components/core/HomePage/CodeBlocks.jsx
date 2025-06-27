@@ -24,7 +24,7 @@ const CodeBlocks = ({position, heading, subheading, ctabtn1, ctabtn2, codeblock,
         <CTAButton active={ctabtn2.active} linkto={ctabtn2.linkto}>
         <div className=' flex gap-2 items-center'>
             {ctabtn2.btnText}
-            <FaArrowRight/>
+           
         </div>
         </CTAButton>
         </div>
