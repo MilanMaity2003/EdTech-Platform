@@ -36,7 +36,7 @@ const Home = () => {
             </div>
 
 
-            <div className=" flex flex-row gap-7 mt-8">
+            <div className=" flex flex-col lg:flex-row gap-7 mt-8">
                     <CTAButton active={true} linkto={"/signup"}>
                         Learn More
                     </CTAButton>

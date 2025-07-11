@@ -13,7 +13,7 @@ const userRoutes = require('./routes/User');
 const profieRoutes = require('./routes/Profile');
 const courseRoutes = require('./routes/Course');
 const corsOptions = {
-    origin: "https://localhost:5173",
+    origin: "http://localhost:5173",
     methods: "GET, PUT, POST, DELETE, PATCH, HEAD",
     Credential: true,
 };

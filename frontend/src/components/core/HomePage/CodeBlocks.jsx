@@ -4,10 +4,10 @@ import { FaArrowRight } from "react-icons/fa";
 import {TypeAnimation} from 'react-type-animation'
 const CodeBlocks = ({position, heading, subheading, ctabtn1, ctabtn2, codeblock, backgroundGradient, codeColor}) => {
   return (
-    <div className= {`flex ${position} my-20 justify-between gap-10`}>
+    <div className= {`flex ${position} flex-col my-20 justify-between gap-10`}>
 
     {/* section 1 */}
-    <div className='w-[50%] flex flex-col gap-8'>
+    <div className='lg:w-[50%] flex flex-col gap-8'>
         {heading}
         <div className=' text-richblack-300 font-bold'>
             {subheading}

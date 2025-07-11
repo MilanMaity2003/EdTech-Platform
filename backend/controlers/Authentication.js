@@ -12,7 +12,7 @@
             const userPresent = await User.findOne({email});
 
             if(userPresent){
-                return res.status(401).json({
+                return res.status(409).json({
                     massage:"User is already exit",
                 })
             }

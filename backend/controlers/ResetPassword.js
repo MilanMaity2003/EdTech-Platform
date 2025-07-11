@@ -17,7 +17,7 @@
                                                     resetPasswordExpires: Date.now() + 5*60*1000,
             },
         {new: true});
-        const url = `http://localhost:3000/update-password/${uuid}`
+        const url = `http://localhost:5173/update-password/${uuid}`
         await mailSender(email, 
             "Password Reset Link",
             `Password Reset Link: ${url}`
@@ -39,20 +39,20 @@
         try{
             const {password, confirmPassword, uuid} = req.body;
         if(password !== confirmPassword){
-            return res.json({
+            return res.status(400).json({
                 massage:"Password not matching",  
             });
         }
 
         const userDetails = await User.findOne({uuid: uuid});
         if(!userDetails){
-            return res.json({
+            return res.status(400).json({
                 massage: "Token is invalid",
             })
         }
 
         if(userDetails.resetPasswordExpires < Date.now()){
-            return res.json({
+            return res.status(400).json({
                 massage: "Token is expired, please reegenerate your token"
             })
         }

@@ -49,7 +49,7 @@ const ExploreMore = () => {
       <div className=' lg: h-[150px]'></div>
 
         {/* cards */}
-          <div className='  absolute flex gap-12 justify-between  -translate-y-32  -translate-x-20 ' >
+          <div className='  absolute flex flex-col lg:flex-row gap-12 justify-between  -translate-y-32  -translate-x-20 ' >
               {
                 courses.map((element, index) =>{
                   return (
